@@ -50,18 +50,23 @@ few points of variation between runs):
 
 | | Baseline<br>(no clarification) | Keyword<br>clarification | **Hybrid<br>clarification** |
 |---|---|---|---|
-| Execution accuracy, all | 69.0% | 75.9% | **91.4%** |
-| Execution accuracy, ambiguous | 35.7% | 50.0% | **82.1%** |
+| Execution accuracy, all | 70.7% | 75.9% | **89.7%** |
+| Execution accuracy, ambiguous | 39.3% | 50.0% | **78.6%** |
 | Execution accuracy, unambiguous | 100% | 100% | 100% |
 | Ambiguity detection F1 | – | 27.0% | **96.4%** |
 | Unnecessary questions asked | – | 4 | 1 |
 | Invalid first-try SQL fixed by self-correction | – | 3 / 3 | 0 / 0 |
 
-What's left to fix: in 4 of the 5 ambiguous questions hybrid still gets
-wrong, it *did* ask, but none of the LLM's options matched what the user
-meant (e.g. "new customer" = signed up in the last 6 months). The fifth
-asked about the time window of "total sales last week" instead of money
-vs. order count. Self-correction rarely triggers on this small schema;
+What's left to fix: hybrid asked on all 6 ambiguous questions it still
+gets wrong, but:
+- in 4, none of the LLM's options matched what the user meant (e.g. "new
+  customer" = signed up in the last 6 months);
+- in 1, it asked about the time window of "total sales last week" instead
+  of money vs. order count;
+- in 1 ("revenue over the past month"), the user picked the right option,
+  but the SQL filtered by payment date instead of order date.
+
+Self-correction rarely triggers on this small schema;
 it matters most when a question names something that doesn't exist (e.g.
 a phone number column).
 
