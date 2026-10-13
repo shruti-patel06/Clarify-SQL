@@ -5,3 +5,5 @@ venv/
 .venv/
 .pytest_cache/
 .streamlit/secrets.toml
+.claude/
+skills-lock.json
