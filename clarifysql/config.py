@@ -7,6 +7,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# A hosted database (e.g. Neon) gives one connection URL that already
+# includes ?sslmode=require. If it's set, it wins over the DB_* values
+# below, which describe the local Docker database.
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 DB_SETTINGS = {
     "dbname": os.getenv("DB_NAME"),
     "user": os.getenv("DB_USER"),

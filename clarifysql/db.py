@@ -6,12 +6,14 @@ from contextlib import contextmanager
 
 import psycopg2
 
-from clarifysql.config import DB_SETTINGS
+from clarifysql.config import DATABASE_URL, DB_SETTINGS
 
 STATEMENT_TIMEOUT_MS = 5000
 
 
 def get_connection():
+    if DATABASE_URL:
+        return psycopg2.connect(DATABASE_URL)
     return psycopg2.connect(**DB_SETTINGS)
 
 
